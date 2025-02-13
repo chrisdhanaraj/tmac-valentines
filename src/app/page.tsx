@@ -18,7 +18,15 @@ import vv from "./images/v&vv.png";
 
 const newSpirit = localFont({ src: "./font/NewSpirit.ttf" });
 
-const ImageButton = ({ src, setActiveImage, activeImage }: any) => {
+const ImageButton = ({
+  src,
+  setActiveImage,
+  activeImage,
+}: {
+  src: StaticImageData;
+  setActiveImage: (src: StaticImageData) => void;
+  activeImage: StaticImageData;
+}) => {
   return (
     <NextImage
       className={`border-2 ${
