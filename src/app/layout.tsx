@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import dolo from "./images/doloisdry.png";
+import dolo from "./images/og-graph.jpg";
 
 import "./globals.css";
 
