@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
+
 import dolo from "./images/og-graph.jpg";
 
 import "./globals.css";
@@ -19,7 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-pink-50">{children}</body>
+      <body className="bg-pink-50">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

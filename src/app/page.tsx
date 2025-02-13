@@ -56,7 +56,6 @@ export default function Home() {
 
       const context = canvas.getContext("2d");
 
-      console.log(activeImage);
       const img = new Image();
       img.src = activeImage.src;
 
