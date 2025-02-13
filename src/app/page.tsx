@@ -67,8 +67,8 @@ export default function Home() {
         context.font = `70px ${newSpirit.style.fontFamily}`;
 
         context.fillStyle = "#166534";
-        context.fillText(from, 190, 1353);
-        context.fillText(to, 740, 1353);
+        context.fillText(from, 190, 1355);
+        context.fillText(to, 740, 1355);
 
         const image = canvas.toDataURL("image/png");
         const link = document.createElement("a");
@@ -166,14 +166,14 @@ export default function Home() {
           <div className="absolute bottom-[1.8%] left-[18%]">
             <input
               autoFocus
-              className="appearance-none bg-transparent text-green-800 text-2xl outline-none"
+              className="appearance-none bg-transparent text-green-800 text-2xl min-[530px]:text-3xl outline-none"
               value={from}
               onChange={(evt) => setFrom(evt.target.value)}
             />
           </div>
           <div className="absolute bottom-[1.8%] right-[7%] w-[25%] ">
             <input
-              className="appearance-none bg-transparent text-green-800 text-2xl outline-none w-full"
+              className="appearance-none bg-transparent text-green-800 text-2xl min-[530px]:text-3xl outline-none w-full"
               value={to}
               onChange={(evt) => setTo(evt.target.value)}
             />
