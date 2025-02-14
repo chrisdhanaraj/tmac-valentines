@@ -3,18 +3,20 @@
 import * as React from "react";
 import NextImage, { StaticImageData } from "next/image";
 import localFont from "next/font/local";
-import bagelme from "./images/bagelme.png";
-import catchingvibes from "./images/catchingvibes.png";
-import doloisdry from "./images/doloisdry.png";
-import grandslam from "./images/grandslam.png";
-import heartrally from "./images/heart-rally.png";
-import linedolo from "./images/line-dolo.png";
-import lovelovenet from "./images/love-love-net.png";
-import niceace from "./images/niceace.png";
-import perfectmatch from "./images/perfectmatch.png";
-import servinglooks from "./images/servinglooks.png";
-import urcourt from "./images/urcourt.png";
-import vv from "./images/v&vv.png";
+import { UAParser } from "ua-parser-js";
+
+import bagelme from "./images/bagelme.jpg";
+import catchingvibes from "./images/catchingvibes.jpg";
+import doloisdry from "./images/doloisdry.jpg";
+import grandslam from "./images/grandslam.jpg";
+import heartrally from "./images/heart-rally.jpg";
+import linedolo from "./images/line-dolo.jpg";
+import lovelovenet from "./images/love-love-net.jpg";
+import niceace from "./images/niceace.jpg";
+import perfectmatch from "./images/perfectmatch.jpg";
+import servinglooks from "./images/servinglooks.jpg";
+import urcourt from "./images/urcourt.jpg";
+import vv from "./images/v&vv.jpg";
 
 const newSpirit = localFont({ src: "./font/NewSpirit.ttf" });
 
@@ -69,11 +71,39 @@ export default function Home() {
         context.fillText(from, 190, 1355);
         context.fillText(to, 740, 1355);
 
-        const image = canvas.toDataURL("image/png");
-        const link = document.createElement("a");
-        link.download = `valentines.png`;
-        link.href = image;
-        link.click();
+        const { device } = UAParser(navigator.userAgent);
+
+        if (device.is("mobile")) {
+          canvas.toBlob(async (blob) => {
+            // Even if you want to share just one file you need to
+            // send them as an array of files.
+            const files = [
+              new File([blob], "valentines.jpg", { type: blob.type }),
+            ];
+            const shareData = {
+              text: `From ${from} to ${to}`,
+              title: "Valentine's",
+              files,
+            };
+            if (navigator.canShare(shareData)) {
+              try {
+                await navigator.share(shareData);
+              } catch (err) {
+                if (err.name !== "AbortError") {
+                  console.error(err.name, err.message);
+                }
+              }
+            } else {
+              console.warn("Sharing not supported", shareData);
+            }
+          });
+        } else {
+          const image = canvas.toDataURL("image/jpg");
+          const link = document.createElement("a");
+          link.download = `valentines.jpg`;
+          link.href = image;
+          link.click();
+        }
       };
     },
     [from, to]
